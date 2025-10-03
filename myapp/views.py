@@ -43,3 +43,25 @@ class UserRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 
 
 
+class TripListCreateView(generics.ListCreateAPIView):
+    queryset = Trip.objects.all()
+    serializer_class = TripSerializer
+    permission_classes = [IsAuthenticated]
+    filter_backends = [DjangoFilterBackend]
+    firterset_class = TripFilter
+    pagination_class = StandardResultsSetPagination
+    
+    def perform_crete(self, serializer):
+        if self.request.user.role not in ['taxi', 'admin']:
+            raise ValidationError("Only Taxi or Admin can create trips.")
+        serializer.save(taxi=self.request.user)
+
+
+
+class TripRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Trip.objects.all()
+    serializer_class = TripSerializer
+    permission_classes = [IsAuthenticated, IsTaxiOwnerOrAdmin]
+    
+
+
