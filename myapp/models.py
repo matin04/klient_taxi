@@ -21,7 +21,7 @@ class Profile(models.Model):
     total_bookings = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
 
 class Trip(models.Model):
@@ -41,4 +41,5 @@ class Booking(models.Model):
     seats_booked = models.IntegerField()
 
     def __str__(self):
-        return self.seats_booked
+        return f"{self.user.username} booked {self.seats_booked} seat(s) for trip {self.trip.id}"
+

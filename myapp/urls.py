@@ -3,7 +3,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from .views import (
     RegisterView, LogoutView, UserListView, UserRetrieveUpdateDestroyView,
     TripListCreateView, TripRetrieveUpdateDestroyView,
-    BookingListCreateView, BookingRetraiveDestroyView,
+    BookingListCreateView, BookingRetrieveDestroyView,
     CancelBookingView
 )
 
@@ -17,6 +17,6 @@ urlpatterns = [
     path('trips/', TripListCreateView.as_view()),
     path('trips/<int:pk>/', TripRetrieveUpdateDestroyView.as_view()),
     path('bookings/', BookingListCreateView.as_view()),
-    path('bookings/<int:pk>/', BookingRetraiveDestroyView.as_view()),
-    path('bookings/cancel/<int:pk>/', CancelBookingView.as_view()),
+    path('bookings/<int:pk>/', BookingRetrieveDestroyView.as_view()),
+    path('bookings/<int:pk>/cancel/', CancelBookingView.as_view()),
 ]

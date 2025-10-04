@@ -11,3 +11,4 @@ class TripFilter(django_filters.FilterSet):
     class Meta:
         model = Trip
         fields = ['origin', 'destination', 'min_price', 'max_price', 'date']
+
